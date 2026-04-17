@@ -3,59 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ta'lim Loyihasi | Kirish</title>
-    <!-- Bootstrap 5 CSS -->
+    <title>Ta'lim Platformasi | Kirish</title>
+    <meta name="description" content="To'liq stekli ta'lim loyihasi - Login sahifasi">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-card {
+            width: 420px;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            color: white;
+        }
+        .login-card h2 { font-weight: 800; }
+        .login-card .form-control {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+        }
+        .login-card .form-control:focus {
+            background: rgba(255,255,255,0.08);
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+            color: white;
+        }
+        .login-card .form-control::placeholder { color: #64748b; }
+        .btn-primary {
+            background: #6366f1;
+            border: none;
+            border-radius: 12px;
+            padding: 0.8rem;
+            font-weight: 600;
+        }
+        .btn-primary:hover { background: #4f46e5; transform: translateY(-1px); }
+        .btn-success { border-radius: 12px; padding: 0.8rem; font-weight: 600; }
+        a { color: #818cf8; }
+        .alert { border-radius: 12px; }
+        .blob {
+            position: fixed; width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(99,102,241,0.15), transparent 70%);
+            border-radius: 50%; filter: blur(60px); z-index: -1;
+        }
+        .blob-1 { top: -100px; left: -100px; }
+        .blob-2 { bottom: -100px; right: -100px; }
+    </style>
 </head>
-<body class="bg-light">
-    <div class="container d-flex align-items-center justify-content-center vh-100">
-        <div class="card shadow-lg p-4" style="width: 400px; border-radius: 20px;">
-            <div class="text-center mb-4">
-                <h2 class="fw-bold">Xush Kelibsiz</h2>
-                <p class="text-muted">Tizimga kirish uchun ma'lumotlarni kiriting</p>
-            </div>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
 
-            <!-- Login Form -->
-            <form id="loginForm">
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" id="loginEmail" class="form-control" placeholder="admin@example.com" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Parol</label>
-                    <input type="password" id="loginPass" class="form-control" placeholder="password" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100 py-2">Kirish</button>
-            </form>
-
-            <div class="text-center mt-3">
-                <small>Hisobingiz yo'qmi? <a href="#" onclick="toggleAuth(true)">Ro'yxatdan o'tish</a></small>
-            </div>
-
-            <!-- Register Form (Hidden by default) -->
-            <form id="registerForm" class="d-none">
-                <div class="mb-3">
-                    <label class="form-label">Foydalanuvchi nomi</label>
-                    <input type="text" id="regUser" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" id="regEmail" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Parol</label>
-                    <input type="password" id="regPass" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-success w-100 py-2">Ro'yxatdan o'tish</button>
-                <div class="text-center mt-3">
-                    <small>Hisobingiz bormi? <a href="#" onclick="toggleAuth(false)">Kirish</a></small>
-                </div>
-            </form>
+    <div class="login-card">
+        <div class="text-center mb-4">
+            <h2>EDU <span style="color:#818cf8">Platform</span></h2>
+            <p class="text-secondary">Tizimga kirish</p>
         </div>
+
+        <div id="alertBox" class="d-none"></div>
+
+        <!-- LOGIN FORM -->
+        <form id="loginForm">
+            <div class="mb-3">
+                <label class="form-label text-secondary small">Email</label>
+                <input type="email" id="loginEmail" class="form-control" placeholder="admin@example.com" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-secondary small">Parol</label>
+                <input type="password" id="loginPass" class="form-control" placeholder="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mb-3">Kirish</button>
+            <p class="text-center text-secondary small mb-0">Hisobingiz yo'qmi? <a href="#" id="showRegister">Ro'yxatdan o'tish</a></p>
+        </form>
+
+        <!-- REGISTER FORM -->
+        <form id="registerForm" class="d-none">
+            <div class="mb-3">
+                <label class="form-label text-secondary small">Foydalanuvchi nomi</label>
+                <input type="text" id="regUser" class="form-control" placeholder="Ismingiz" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-secondary small">Email</label>
+                <input type="email" id="regEmail" class="form-control" placeholder="email@example.com" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-secondary small">Parol</label>
+                <input type="password" id="regPass" class="form-control" placeholder="Kamida 6 ta belgi" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100 mb-3">Ro'yxatdan o'tish</button>
+            <p class="text-center text-secondary small mb-0">Hisobingiz bormi? <a href="#" id="showLogin">Kirish</a></p>
+        </form>
+
+        <hr style="border-color: rgba(255,255,255,0.1);">
+        <p class="text-center text-secondary small mb-0">Demo: admin@example.com / password</p>
     </div>
 
-    <!-- JS Scripts -->
-    <script src="js/app.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/auth.js"></script>
 </body>
 </html>
