@@ -30,8 +30,8 @@
             <h1 data-reveal>G'oyalarni <span class="gradient-text">Haqiqatga</span> Aylantiramiz</h1>
             <p data-reveal>Zamonaviy texnologiyalar va mukammal dizayn orqali biznesingizni yangi bosqichga olib chiqing.</p>
             <div class="cta-group" data-reveal>
-                <a href="#" class="btn btn-primary">Lohihani boshlash</a>
-                <a href="#" class="btn btn-secondary">Demo ko'rish</a>
+                <a href="#contact" class="btn btn-primary">Loyihani boshlash</a>
+                <a href="javascript:void(0)" class="btn btn-secondary" id="openDemo">Demo ko'rish</a>
             </div>
         </section>
 
@@ -52,7 +52,33 @@
                 <p>Barcha turdagi qurilmalar (telefon, planshet, kompyuter) uchun mukammal ko'rinish.</p>
             </div>
         </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container" style="max-width: 600px; text-align: center;" data-reveal>
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Biz bilan bog'laning</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2.5rem;">Loyihangiz haqida gapirib bering, biz uni amalga oshiramiz.</p>
+                <form class="contact-form">
+                    <input type="text" placeholder="Ismingiz" required>
+                    <input type="email" placeholder="Emailingiz" required>
+                    <textarea placeholder="Loyihangiz haqida qisqacha..." rows="4" required></textarea>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; border: none; cursor: pointer;">Xabarni yuborish</button>
+                </form>
+            </div>
+        </section>
     </main>
+
+    <!-- Demo Modal -->
+    <div id="demoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="video-placeholder">
+                <div class="play-btn"></div>
+                <p>Demo Video Yuklanmoqda...</p>
+            </div>
+            <h3 style="margin: 1.5rem 0 0.5rem;">Loyiha Demo Taqdimoti</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Bizning tizimimiz qanday ishlashini 2 daqiqa ichida bilib oling.</p>
+        </div>
+    </div>
 
     <footer>
         <div class="container">

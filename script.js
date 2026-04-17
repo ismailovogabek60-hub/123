@@ -27,3 +27,34 @@ document.addEventListener('mousemove', (e) => {
         blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
     });
 });
+
+// Modal Logic
+const modal = document.getElementById('demoModal');
+const openBtn = document.getElementById('openDemo');
+const closeBtn = document.querySelector('.close-modal');
+
+openBtn.onclick = () => modal.style.display = 'flex';
+closeBtn.onclick = () => modal.style.display = 'none';
+window.onclick = (e) => {
+    if (e.target == modal) modal.style.display = 'none';
+}
+
+// Form Submission
+const form = document.querySelector('.contact-form');
+form.onsubmit = (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button');
+    const originalText = btn.innerText;
+    
+    btn.innerText = 'Yuborilmoqda...';
+    btn.disabled = true;
+    
+    setTimeout(() => {
+        btn.innerText = 'Xabar yuborildi! ✅';
+        form.reset();
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.disabled = false;
+        }, 3000);
+    }, 1500);
+};
