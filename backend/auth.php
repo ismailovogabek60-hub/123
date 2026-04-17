@@ -83,11 +83,30 @@ function generateCaptcha() {
     $text = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, 5);
     $_SESSION['captcha_text'] = $text;
     
-    $image = imagecreatetruecolor(60, 30);
-    $bg = imagecolorallocate($image, 22, 33, 62);
-    $fg = imagecolorallocate($image, 255, 255, 255);
+    // Check if GD library is available
+    if (!function_exists('imagecreatetruecolor')) {
+        // Fallback for missing GD: Output as simple text (not ideal but works for education)
+        header('Content-Type: text/plain');
+        echo "GD Library topilmadi! Kod: " . $text;
+        exit;
+    }
+
+    // Clear any previous output (prevents corrupted image)
+    if (ob_get_length()) ob_clean();
+    
+    $image = imagecreatetruecolor(80, 40);
+    $bg = imagecolorallocate($image, 248, 249, 250); // Light gray
+    $fg = imagecolorallocate($image, 13, 110, 253); // Bootstrap primary blue
+    $noise = imagecolorallocate($image, 200, 200, 200);
+    
     imagefill($image, 0, 0, $bg);
-    imagestring($image, 5, 5, 5, $text, $fg);
+    
+    // Add some random noise lines
+    for($i=0; $i<5; $i++) {
+        imageline($image, rand(0,80), rand(0,40), rand(0,80), rand(0,40), $noise);
+    }
+    
+    imagestring($image, 5, 15, 12, $text, $fg);
     
     header('Content-Type: image/png');
     imagepng($image);
