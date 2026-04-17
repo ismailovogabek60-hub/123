@@ -6,10 +6,6 @@ function toggleAuth(showRegister) {
     document.getElementById('registerForm').classList.toggle('d-none', !showRegister);
 }
 
-function refreshCaptcha() {
-    const img = document.getElementById('captchaImg');
-    img.src = '../backend/auth.php?action=captcha&t=' + Date.now();
-}
 
 // --- AJAX Requests ---
 
@@ -20,7 +16,6 @@ if (document.getElementById('loginForm')) {
         const formData = new FormData();
         formData.append('email', document.getElementById('loginEmail').value);
         formData.append('password', document.getElementById('loginPass').value);
-        formData.append('captcha', document.getElementById('loginCaptcha').value);
 
         const res = await fetch('../backend/auth.php?action=login', {
             method: 'POST',
@@ -32,7 +27,6 @@ if (document.getElementById('loginForm')) {
             window.location.href = 'dashboard.html';
         } else {
             alert(data.error || 'Xatolik yuz berdi');
-            refreshCaptcha();
         }
     };
 }
